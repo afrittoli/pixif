@@ -195,7 +195,7 @@ class PixifCollection(object):
                     try:
                         self.images.append(PixifImage(os.path.join(root, filename)))
                     except Exception as e:
-                        print e
+                        print(e)
 
 class PixifConfig(dict):
     opts_map = {
@@ -284,7 +284,7 @@ if __name__ == '__main__':
             ['src=', 'dst=', 'saveas=', 'method=', 'log', 'overwrite']
         )
     except getopt.GetoptError:
-        print 'ERROR: Incorrect usage'
+        print('ERROR: Incorrect usage')
     else:
         config_filename = unparsed[0] if unparsed else ''
         main(config_filename, opts)
