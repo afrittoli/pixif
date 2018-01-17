@@ -244,7 +244,7 @@ class PixifConfig(dict):
 
                 self[s][name] = value
 
-    def from_opts(opts):
+    def from_opts(self, opts):
         self['section'] = self.defaults.copy()
 
         opts_dict = dict(opts)
