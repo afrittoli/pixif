@@ -8,7 +8,7 @@ import EXIF
 import os
 import shutil
 from datetime import datetime
-import ConfigParser
+import six
 
 class PixifLogger(object):
     def __init__(self, section, filename_out):
@@ -74,7 +74,7 @@ class PixifImage(object):
         return '<PixifImage at {0}>'.format(self.filename)
 
     def __iter__(self):
-        return self.tags.iteritems()
+        return six.iteritems(self.tags)
 
     def set_file_tags(self):
         self.tags.update({
@@ -229,7 +229,7 @@ class PixifConfig(dict):
     def from_file(self, filename):
         self.clear()
 
-        config = ConfigParser.RawConfigParser()
+        config = six.configparser.RawConfigParser()
         config.read(filename)
 
         for s in config.sections():
@@ -249,7 +249,7 @@ class PixifConfig(dict):
 
         opts_dict = dict(opts)
 
-        for o, opt in opts_dict.iteritems():
+        for o, opt in six.iteritems(opts_dict):
             if o in self.opts_map:
                 key = self.opts_map[o]
             else:
@@ -261,7 +261,7 @@ def main(config_filename, opts):
     config = PixifConfig(filename=config_filename, opts=opts)
     logger_file = os.path.join(os.path.split(config_filename)[0], 'pixif.log')
 
-    for c, cfg in config.iteritems():
+    for c, cfg in six.iteritems(config):
         if not cfg['enabled']:
             continue
 
